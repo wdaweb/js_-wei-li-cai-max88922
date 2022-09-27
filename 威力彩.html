@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // min  max      
+    //  1    38
+    // 0     37  +  1(min)
+
+    const rand = (min, max) => {
+      return Math.round(Math.random() * (max - min) + min)
+    }
+
+    // A 區 1~38 取 6 個數字 (思考如何不重複數字)
+    // B 區 1~8 取 1 個數字
+
+    let lottoA = []      // 先建立一個 A 區的空陣列存放資料
+    let random = rand(1, 38)     // 宣告 random = 1~38 隨機數
+    for (let i = 1; i <= 6; i++) {
+      lottoA.push(random)  // 將 1~38 隨機數 push 進去 lottoA陣列
+      while (lottoA.includes(random)) {
+        // while 用在不確定次數，()括弧裡為 true 才會執行。
+        // 用 includes 檢查有沒有重複，如果有重複會回傳 true ，那就再跑一次下面的 1~38 隨機數。
+        random = rand(1, 38)
+      }
+    }
+    document.write(`A區的號碼是: ${lottoA}<br>B區的號碼是: ${rand(1, 8)} `)
+
+
+
+
+    // 三種老師解法
+    // const groupA = []
+
+    // 取六個數字
+    // for (let i = 0; i < 6; i++) {
+    // 每次隨機一個數字
+    //   const num = rand(1, 38)
+    //   if (groupA.includes(num)) {
+    // 如果重複，迴圈再跑一次
+    //     i--
+    //   } else {
+    // 沒有重複就放進陣列
+    //     groupA.push(num)
+    //   }
+    // }
+
+    // 取滿六個數字為止
+    // while (groupA.length < 6) {
+    // 每次隨機一個數字
+    //   const num = rand(1, 38)
+    // 不重複就放進陣列
+    //   if (!groupA.includes(num)) {
+    //     groupA.push(num)
+    //   }
+    // }
+
+    // 建立一個有 38 個數字的陣列
+    // const numbers = []
+    // for (let i = 1; i <= 38; i++) {
+    //   numbers.push(i)
+    // }
+    // 取六個數字
+    // for (let i = 0; i < 6; i++) {
+    // 每次隨機一個陣列索引
+    //   const index = rand(0, numbers.length - 1)
+    // 將取到的索引對應值放入群組
+    //   groupA.push(numbers[index])
+    // 將取到的索引從數字陣列移除
+    //   numbers.splice(index, 1)
+    // }
+    // document.write(groupA.join(','))
+  </script>
+</body>
+
+</html>
